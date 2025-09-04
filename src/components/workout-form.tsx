@@ -11,6 +11,7 @@ export function WorkoutForm({ onAdd }: WorkoutFormProps) {
   const [durationMinutes, setDurationMinutes] = useState(0);
   const [intensity, setIntensity] = useState<Intensity>(1);
   const [date, setDate] = useState("");
+  const [notes, setNotes] = useState("");
 
   function handleSubmit(event: React.FormEvent): void {
     event.preventDefault();
@@ -21,6 +22,7 @@ export function WorkoutForm({ onAdd }: WorkoutFormProps) {
       date: date,
       durationMinutes: durationMinutes,
       intensity: intensity,
+      notes: notes,
     };
 
     onAdd(workout);
@@ -29,6 +31,7 @@ export function WorkoutForm({ onAdd }: WorkoutFormProps) {
     setDurationMinutes(0);
     setIntensity(1);
     setDate("");
+    setNotes("");
   }
 
   return (
@@ -78,6 +81,15 @@ export function WorkoutForm({ onAdd }: WorkoutFormProps) {
         placeholder="Dia de treino"
         onChange={(e) => setDate(e.target.value)}
         value={date}
+      />
+
+      <label htmlFor="workout-note">Anotações</label>
+      <input
+        type="text"
+        placeholder="Anotações"
+        id="workout-note"
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
       />
 
       <button type="submit">Adicionar treino</button>
