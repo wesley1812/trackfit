@@ -11,10 +11,15 @@ function App() {
     setListWorkout((previous) => [...previous, workout]);
   }
 
+  function cleanWorkoutList(): void {
+    setListWorkout([]);
+  }
+
   return (
     <>
       <Header />
       <main>
+        <button onClick={cleanWorkoutList}>Limpar treinos</button>
         <WorkoutForm onAdd={addWorkout} />
         <WorkoutList workoutList={listWorkout} />
       </main>
