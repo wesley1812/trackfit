@@ -1,19 +1,27 @@
+import { useState } from "react";
 import { Header } from "./components/header";
-import { WorkoutCard } from "./components/workout-card";
+import { WorkoutForm } from "./components/workout-form";
+import { WorkoutList } from "./components/workout-list";
+import type { Workout } from "./types/workout";
 
 function App() {
+  const [listWorkout, setListWorkout] = useState<Workout[]>([]);
+
+  function addWorkout(workout: Workout): void {
+    setListWorkout((previous) => [...previous, workout]);
+  }
+
+  function cleanWorkoutList(): void {
+    setListWorkout([]);
+  }
+
   return (
     <>
       <Header />
-
       <main>
-        <WorkoutCard
-          id="1"
-          date="20/05/2026"
-          durationMinutes={45}
-          intensity={4}
-          title="Aula de zumba"
-        />
+        <button onClick={cleanWorkoutList}>Limpar treinos</button>
+        <WorkoutForm onAdd={addWorkout} />
+        <WorkoutList workoutList={listWorkout} />
       </main>
     </>
   );
