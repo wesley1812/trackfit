@@ -1,54 +1,21 @@
 import { useState } from "react";
 import { Header } from "./components/header";
+import { WorkoutForm } from "./components/workout-form";
 import { WorkoutList } from "./components/workout-list";
 import type { Workout } from "./types/workout";
 
 function App() {
-  const [listWorkout, setListWorkout] = useState<Workout[]>([
-    {
-      id: "1",
-      date: "20/06/2026",
-      durationMinutes: 60,
-      intensity: 5,
-      title: "Aula de zumba",
-    },
-    {
-      id: "2",
-      date: "21/06/2026",
-      durationMinutes: 45,
-      intensity: 3,
-      title: "Aula de fitdance",
-    },
-    {
-      id: "3",
-      date: "22/06/2026",
-      durationMinutes: 55,
-      intensity: 4,
-      title: "Aula de axé",
-    },
-  ]);
+  const [listWorkout, setListWorkout] = useState<Workout[]>([]);
+
+  function addWorkout(workout: Workout): void {
+    setListWorkout((previous) => [...previous, workout]);
+  }
 
   return (
     <>
       <Header />
       <main>
-        <button
-          onClick={() =>
-            setListWorkout([
-              ...listWorkout,
-              {
-                id: "3",
-                date: "22/06/2026",
-                durationMinutes: 50,
-                intensity: 5,
-                title: "Aula jiu-jitsu",
-              },
-            ])
-          }
-        >
-          Adicionar treino
-        </button>
-
+        <WorkoutForm onAdd={addWorkout} />
         <WorkoutList workoutList={listWorkout} />
       </main>
     </>
